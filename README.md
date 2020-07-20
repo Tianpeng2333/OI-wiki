@@ -1,7 +1,8 @@
-[![Word Art](https://raw.githubusercontent.com/24OI/OI-wiki/master/docs/images/wordArt.png)](https://oi-wiki.org/)
+[![Word Art](docs/images/wordArt.webp)](https://oi-wiki.org/)
 
 # 欢迎来到 **OI Wiki**！
 
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-brightgreen?logo=gitpod&style=flat-square)](https://gitpod.io/#https://github.com/OI-wiki/OI-wiki)
 [![Travis](https://img.shields.io/travis/OI-WIKI/OI-wiki.svg?style=flat-square)](https://travis-ci.org/OI-wiki/OI-wiki)
 [![Uptime Robot Status](https://img.shields.io/uptimerobot/status/m781254113-3e3bac467c64fc99eafd383e.svg?style=flat-square)](https://status.oi-wiki.org/)
 [![Telegram](https://img.shields.io/badge/OI--wiki-join%20Telegram%20chat-brightgreen.svg?style=flat-square)](https://t.me/OIwiki)
@@ -21,7 +22,7 @@
 
 目前，**OI Wiki** 的内容还有很多不完善的地方，知识点覆盖不够全面，存在一些低质量页面需要修改。**OI Wiki** 团队以及参与贡献的小伙伴们正在积极完善这些内容。
 
-关于上述待完善内容，请参见 **OI Wiki** 的 [Issues](https://github.com/OI-wiki/OI-wiki/issues) 以及 [迭代计划](https://github.com/OI-wiki/OI-wiki/labels/%E8%BF%AD%E4%BB%A3%E8%AE%A1%E5%88%92%20%2F%20Iteration%20Plan)。
+关于上述待完善内容，请参见 **OI Wiki** 的 [Issues](https://github.com/OI-wiki/OI-wiki/issues) 以及 [迭代计划](https://github.com/OI-wiki/OI-wiki/labels/Iteration%20Plan%20%2F%20%E8%BF%AD%E4%BB%A3%E8%AE%A1%E5%88%92)。
 
 与此同时， **OI Wiki** 源于社区，提倡 **知识自由**，在未来也绝不会商业化，将始终保持独立自由的性质。
 
@@ -47,8 +48,8 @@ cd OI-wiki
 # 安装 mkdocs
 pip3 install -U -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple/
 
-# 使用我们的自定义主题（不是必须执行）
-chmod +x ./scripts/build.sh && ./scripts/build.sh
+# 使用我们的自定义主题
+chmod +x ./scripts/install_theme.sh && ./scripts/install_theme.sh
 
 # 两种方法（选其一即可）：
 # 1. 运行一个本地服务器，访问 http://127.0.0.1:8000 可以查看效果
@@ -61,21 +62,21 @@ mkdocs build -v
 mkdocs --help
 ```
 
-我们现在在服务器端渲染 MathJax ，如果希望实现类似效果，可以参考 [netlify_build.sh](https://github.com/OI-wiki/OI-wiki/blob/master/scripts/netlify_build.sh)。（需要安装 Node.js）
+我们现在在服务器端渲染 MathJax ，如果希望实现类似效果，可以参考 [.travis.yml](https://github.com/OI-wiki/OI-wiki/blob/master/.travis.yml)。（需要安装 Node.js）
 
 ### 镜像
 
 ```bash
-# Coding 上的镜像仓库和 GitHub 仓库的内容相同
-git clone https://git.dev.tencent.com/scaffrey/OI-wiki.git
+# Gitee 码云 上的镜像仓库和 GitHub 仓库的内容相同
+git clone https://gitee.com/OI-wiki/OI-wiki.git
 ```
 
 ### 离线版
 
-可以使用 `gh-pages` 分支的内容（CODING 上面的分支名叫 `coding-pages`）
+可以使用 `gh-pages` 分支的内容
 
 ```bash
-git clone https://git.dev.tencent.com/scaffrey/OI-wiki.git -b coding-pages
+git clone https://gitee.com/OI-wiki/OI-wiki.git -b gh-pages
 ```
 
 本地启动一个 http 服务器可能会更方便一些。
@@ -102,12 +103,17 @@ python2 -m SimpleHTTPServer
 
 * * *
 
+## 开源软件供应链点亮计划 —— 暑期 2020
+
+OI Wiki 社区正在参加由中科院软件所与华为 openEuler 项目共同举办的 [“开源软件供应链点亮计划——暑期2020”](https://isrc.iscas.ac.cn/summer2020/) 项目。 OI Wiki 也准备好了若干需求等待大家积极参与，详情请见 [「“开源软件供应链点亮计划——暑期2020”项目提案」](https://github.com/OI-wiki/OI-wiki/wiki/Open-Source-Promotion-Plan---Summer-2020#) 。如有意愿，请加入 Telegram 群组 [Project OI Wiki Summer2020](https://t.me/joinchat/GaEGzht3n19XgNcd3giLSA) 。
+
 ## 版权声明
 
 <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />
 除特别注明外，项目中除了代码部分均采用<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh"> (Creative Commons BY-SA 4.0) 知识共享署名 - 相同方式共享 4.0 国际许可协议</a> 及附加的 [The Star And Thank Author License](https://github.com/zTrix/sata-license) 进行许可。
 
-换言之，使用过程中您可以自由地共享、演绎，但是必须署名、以相同方式共享、分享时没有附加限制，  
+换言之，使用过程中您可以自由地共享、演绎，但是必须署名、以相同方式共享、分享时没有附加限制，
+
 而且需要为 GitHub 仓库点赞（Star）。
 
 而如果你想要引用这个 GitHub 仓库，可以使用如下的 bibtex：
@@ -135,7 +141,7 @@ python2 -m SimpleHTTPServer
 
 特别感谢 [24OI](https://github.com/24OI) 的朋友们的大力支持！
 
-<!-- <img src='https://i.loli.net/2018/12/07/5c0a6e4c31b30.png' alt='QVQNetWork' width=233> 
+<!-- <img src='https://i.loli.net/2018/12/07/5c0a6e4c31b30.png' alt='QVQNetWork' width=233>
 鸣谢 QVQNetwork 赞助的服务器。 -->
 
 感谢 北大算协 和 Hulu 的支持！

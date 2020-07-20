@@ -4,17 +4,17 @@ Python 是一种目前已在世界上广泛使用的解释型面向对象语言�
 
 ### 为什么要学习 Python
 
--   Python 是一种 **解释型** 语言：类似于 PHP 与 Perl，它在开发过程中无需编译，即开即用，跨平台兼容性好。
--   Python 是一种 **交互式** 语言：您可以在命令行的提示符 `>>>` 后直接输入代码，这将使您的代码更易于调试。
--   Python 易学易用，且覆盖面广：从简单的输入输出到科学计算甚至于大型 WEB 应用，Python 可以帮助您在 **极低的学习成本** 下快速写出适合自己的程序，从而让您的程序生涯如虎添翼，为以后的学习和工作增加一项实用能力。
--   Python 易读性强，且在世界广泛使用：这意味着您能够在使用过程中比其他语言 **更快获得支持** ， **更快解决问题** 。
--   哦，还有一个最重要的：它在各平台下的环境易于配置，并且目前市面上大部分流行的 Linux 发行版（甚至于 `NOI Linux` ）中也大都 **内置** 了个版本比较旧的 Python，这意味着您能真正在考场上使用它，让它成为您的最佳拍档。
+- Python 是一种 **解释型** 语言：类似于 PHP 与 Perl，它在开发过程中无需编译，即开即用，跨平台兼容性好。
+- Python 是一种 **交互式** 语言：您可以在命令行的提示符 `>>>` 后直接输入代码，这将使您的代码更易于调试。
+- Python 易学易用，且覆盖面广：从简单的输入输出到科学计算甚至于大型 WEB 应用，Python 可以帮助您在 **极低的学习成本** 下快速写出适合自己的程序，从而让您的程序生涯如虎添翼，为以后的学习和工作增加一项实用能力。
+- Python 易读性强，且在世界广泛使用：这意味着您能够在使用过程中比其他语言 **更快获得支持** ， **更快解决问题** 。
+- 哦，还有一个最重要的：它在各平台下的环境易于配置，并且目前市面上大部分流行的 Linux 发行版（甚至于 `NOI Linux` ）中也大都 **内置** 了个版本比较旧的 Python，这意味着您能真正在考场上使用它，让它成为您的最佳拍档。
 
 ### 学习 Python 时需要注意的事项
 
--   目前的 Python 分为 Python 2 和 Python 3 两个版本，其中 Python 2 虽然 [几近废弃](https://pythonclock.org/) ，但是仍被一些老旧系统和代码所使用。我们通常不能确定在考场上可以使用的版本，因而会 **介绍较新版本的 Python** ，但还是建议读者了解一下 Python 2 的相关语法，并比较两者之间的差异。
--   如果您之前使用 C++ 语言，那么很遗憾地告诉您，Python 的语法结构与 C++ 差异还是比较大的，请注意使用的时候不要混淆。
--   由于 Python 是高度动态的解释型语言，因此其程序运行有大量的额外开销。通常而言，实现同样功能时 Python 代码越少速度越快（但不要追求极端）。尤其是 **for 循环在 Python 中运行的奇慢无比** 。因此在使用 Python 时若想获得高性能，尽量使用 `filter` , `map` 等内置函数，或者使用 [“列表理解”](https://www.pythonforbeginners.com/basics/list-comprehensions-in-python) 语法的手段来避免循环。
+- 目前的 Python 分为 Python 2 和 Python 3 两个版本，其中 Python 2 虽然 [几近废弃](https://pythonclock.org/) ，但是仍被一些老旧系统和代码所使用。我们通常不能确定在考场上可以使用的版本，因而会 **介绍较新版本的 Python** ，但还是建议读者了解一下 Python 2 的相关语法，并比较两者之间的差异。
+- 如果您之前使用 C++ 语言，那么很遗憾地告诉您，Python 的语法结构与 C++ 差异还是比较大的，请注意使用的时候不要混淆。
+- 由于 Python 是高度动态的解释型语言，因此其程序运行有大量的额外开销。通常而言，实现同样功能时 Python 代码越少速度越快（但不要追求极端）。尤其是 **for 循环在 Python 中运行的奇慢无比** 。因此在使用 Python 时若想获得高性能，尽量使用 `filter` , `map` 等内置函数，或者使用 [“列表理解”](https://www.pythonforbeginners.com/basics/list-comprehensions-in-python) 语法的手段来避免循环。
 
 ## 环境安装
 
@@ -43,7 +43,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 这就是 Python 的 **IDLE** 。
 
-???+ note "何谓 [**IDLE**](https://docs.python.org/zh-cn/3/glossary.html#idle)？"
+???+ note "何谓 [**IDLE**](https://docs.python.org/zh-cn/3/glossary.html#term-idle)？"
     Python 的 IDE，“集成开发与学习环境”的英文缩写。是 Python 标准发行版附带的基本编程器和解释器环境。在其他 Python 发行版（如 Anaconda）中还包含 [IPython](https://ipython.org/) ， [Spyder](https://www.spyder-ide.org/) 等更加先进的 IDE。
 
 ### macOS/Linux
@@ -65,7 +65,7 @@ sudo apt install python3
 
 ### 关于镜像和 pip
 
-目前国内关于 **源码** 的镜像缓存主要是 [北京交通大学](https://mirror.bjtu.edu.cn/python/) 和 [华为开源镜像站](https://mirrors.huaweicloud.com/python/) 在做，如果您有下载问题的话可以到那里尝试一下。
+目前国内关于 **源码** 的镜像缓存主要是 [北京交通大学](https://mirror.bjtu.edu.cn/python/) 、 [华为开源镜像站](https://mirrors.huaweicloud.com/python/) 和 [淘宝开源镜像站](https://npm.taobao.org/mirrors/python/) 在做，如果您有下载问题的话可以到那里尝试一下。
 
 如果您还有使用 pip 安装其他模块的需求，请参照 [TUNA 的镜像更换帮助](https://mirrors.tuna.tsinghua.edu.cn/help/pypi/) 。
 
@@ -74,10 +74,10 @@ sudo apt install python3
 
 关于 PyPI 的镜像，可以使用如下大镜像站的资源：
 
--    [清华大学 TUNA 镜像站](https://mirrors.tuna.tsinghua.edu.cn/help/pypi/) 
--    [中国科学技术大学镜像站](http://mirrors.ustc.edu.cn/help/pypi.html) 
--    [豆瓣的 PyPI 源](https://pypi.douban.com/simple) 
--    [华为开源镜像站](https://mirrors.huaweicloud.com/) 
+-  [清华大学 TUNA 镜像站](https://mirrors.tuna.tsinghua.edu.cn/help/pypi/) 
+-  [中国科学技术大学镜像站](http://mirrors.ustc.edu.cn/help/pypi.html) 
+-  [豆瓣的 PyPI 源](https://pypi.douban.com/simple) 
+-  [华为开源镜像站](https://mirrors.huaweicloud.com/) 
 
 ## 基本语法
 
@@ -134,15 +134,19 @@ Python 以其简洁易懂的语法而出名。它基本的语法结构可以非�
 1.6666666666666667
 >>> 5 // 3 # 使用整数除法则会向下取整，输出整数类型
 1
->>> -5 // 3 # 符合向下取整原则
+>>> -5 // 3 # 符合向下取整原则，注意与C/C++不同
 -2
 >>> 5.0 // 3.0 # 如果硬要浮点数向下取整也可以这么做
 1.0
->>> 5 % 3 # 取模同 C++ ，没有什么好说的
+>>> 5 % 3 # 取模
 2
+>>> -5 % 3 # 负数取模结果一定是非负数，这点也与C/C++不同，不过都满足 (a//b)*b+(a%b)==a 
+1
 ```
 
-特别的，Python 封装了乘方（ `**` ）的算法，这也表明 Python 附有 **大整数支持** 。值得一提的是，Python 还通过内置的 `pow(a, b, mod)` 提供了 [快速幂](../math/quick-pow.md) 的高效实现。
+特别的，Python 封装了乘方（ `**` ）的算法，还通过内置的 `pow(a, b, mod)` 提供了 [快速幂](../math/quick-pow.md) 的高效实现。
+
+同时 Python 还提供大整数支持，但是浮点数与 C/C++ 一样存在误差。
 
 ```python3
 >>> 5 ** 2
@@ -270,6 +274,126 @@ array([[0, 0, 1],
 >>> a1.sort(axis=1) # 沿行方向对数组进行原地排序
 ```
 
+## 类型检查和提示
+
+无论是打比赛还是做项目，使用类型提示可以让你更容易地推断代码、发现细微的错误并维护干净的体系结构。Python 最新的几个版本允许你指定明确的类型进行提示，有些工具可以使用这些提示来帮助你更有效地开发代码。Python 的类型检查主要是用类型标注和类型注释进行类型提示和检查。对于 OIer 来说，掌握 Python 类型检查系统的基本操作就足够了，项目实操中，如果你想写出风格更好的、易于类型检查的代码，你可以参考 [Mypy 的文档](https://mypy.readthedocs.io/) 。
+
+### 动态类型检查
+
+Python 是一个动态类型检查的语言，以灵活但隐式的方式处理类型。Python 解释器仅仅在运行时检查类型是否正确，并且允许在运行时改变变量类型。
+
+```python
+>>> if False:
+...     1 + "two"  # This line never runs, so no TypeError is raised
+... else:
+...     1 + 2
+...
+3
+
+>>> 1 + "two"  # Now this is type checked, and a TypeError is raised
+TypeError: unsupported operand type(s) for +: 'int' and 'str'
+```
+
+### 类型提示简例
+
+我们首先通过一个例子来简要说明。假如我们要向函数中添加关于类型的信息，首先需要按如下方式对它的参数和返回值设置类型标注：
+
+```python
+# headlines.py
+
+def headline(text: str, align: bool = True) -> str:
+    if align:
+        return f"{text.title()}\n{'-' * len(text)}"
+    else:
+        return f" {text.title()} ".center(50, "o")
+
+print(headline("python type checking"))
+print(headline("use mypy", centered=True))
+```
+
+但是这样添加类型提示没有运行时的效果——如果我们用错误类型的 `align` 参数，程序依然可以在不报错、不警告的情况下正常运行。
+
+```bash
+$ python headlines.py
+Python Type Checking
+--------------------
+oooooooooooooooooooo Use Mypy oooooooooooooooooooo
+```
+
+因此，我们需要静态检查工具来排除这类错误（例如 [PyCharm](https://www.jetbrains.com/pycharm/) 中就包含这种检查）。最常用的静态类型检查工具是 [Mypy](http://mypy-lang.org/) 。
+
+```bash
+$ pip install mypy
+Successfully installed mypy.
+
+$ mypy headlines.py
+Success: no issues found in 1 source file
+```
+
+如果没有报错，说明类型检查通过；否则，会提示出问题的地方。*值得注意的是，类型检查可以向下（subtype  not subclass）兼容，比如整数就可以在 Mypy 中通过浮点数类型标注的检查（int 是 double 的 subtype，但不是其 subclass）。*
+
+这种检查对于写出可读性较好的代码是十分有帮助的——Bernát Gábor 曾在他的 [The State of Type Hints in Python](https://www.bernat.tech/the-state-of-type-hints-in-python/) 中说过，“类型提示应当出现在任何值得单元测试的代码里”。
+
+### 类型标注
+
+类型标注是自 Python 3.0 引入的特征，是添加类型提示的重要方法。例如这段代码就引入了类型标注，你可以通过调用 `circumference.__annotations__` 来查看函数中所有的类型标注。
+
+```python
+import math
+
+def circumference(radius: float) -> float:
+    return 2 * math.pi * radius
+```
+
+当然，除了函数函数，变量也是可以类型标注的，你可以通过调用 `__annotations__` 来查看函数中所有的类型标注。
+
+```python
+pi: float = 3.142
+
+def circumference(radius: float) -> float:
+    return 2 * pi * radius
+```
+
+变量类型标注赋予了 Python 静态语言的性质，即声明与赋值分离：
+
+```python
+>>> nothing: str
+>>> nothing
+NameError: name 'nothing' is not defined
+
+>>> __annotations__
+{'nothing': <class 'str'>}
+```
+
+### 类型注释
+
+如上所述，Python 的类型标注是 3.0 之后才支持的，这说明如果你需要编写支持遗留 Python 的代码，就不能使用标注。为了应对这个问题，你可以尝试使用类型注释——一种特殊格式的代码注释——作为你代码的类型提示。
+
+```python
+import math
+
+pi = 3.142  # type: float
+
+def circumference(radius):
+    # type: (float) -> float
+    return 2 * pi * radius
+  
+def headline(text, width=80, fill_char="-"):
+    # type: (str, int, str) -> str
+    return f" {text.title()} ".center(width, fill_char)
+
+def headline(
+    text,           # type: str
+    width=80,       # type: int
+    fill_char="-",  # type: str
+):                  # type: (...) -> str
+    return f" {text.title()} ".center(width, fill_char)
+
+print(headline("type comments work", width=40))
+```
+
+这种注释不包含在类型标注中，你无法通过 `__annotations__` 找到它，同类型标注一样，你仍然可以通过 Mypy 运行得到类型检查结果。
+
 ## 常用内置库
 
 在这里介绍一些写算法可能用得到的内置库，具体用法可以自行搜索或者阅读 [官方文档](https://docs.python.org/3/library/index.html) 。
@@ -295,7 +419,7 @@ array([[0, 0, 1],
 
 相信大部分算法竞赛选手已经熟练掌握了 C++98 的语法。接下来我们展示一下 Python 语法的一些应用。
 
-接下来的例子是 [Luogu P4779「【模板】单源最短路径（标准版）」](https://www.luogu.org/problem/P4779) 的代码。我们将 C++ 代码与 Python 代码做出对比：
+接下来的例子是 [Luogu P4779「【模板】单源最短路径（标准版）」](https://www.luogu.com.cn/problem/P4779) 的代码。我们将 C++ 代码与 Python 代码做出对比：
 
 从声明一些常量开始：
 
@@ -578,5 +702,9 @@ if __name__ == '__main__':
 
 ## 参考文档
 
-1.  Python 官方中文文档， <https://docs.python.org/zh-cn/3/tutorial/> 
-2.  Learn Python3 In Y Minutes, <https://learnxinyminutes.com/docs/python3/> 
+1. Python Documentation, <https://www.python.org/doc/> 
+2. Python 官方中文教程， <https://docs.python.org/zh-cn/3/tutorial/> 
+3. Learn Python3 In Y Minutes, <https://learnxinyminutes.com/docs/python3/> 
+4. Real Python Tutorials, <https://realpython.com/> 
+5. 廖雪峰的 Python 教程， <https://www.liaoxuefeng.com/wiki/1016959663602400/> 
+6. GeeksforGeeks: Python Tutorials, <https://www.geeksforgeeks.org/python-programming-language/> 

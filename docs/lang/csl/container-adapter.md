@@ -8,7 +8,7 @@ STL 栈 ( `std::stack` ) 是一种后进先出 (Last In, First Out) 的容器适
 
 ```cpp
 #include <stack>
-using std::stack
+using std::stack;
 ```
 
 ### 栈的定义
@@ -24,11 +24,11 @@ stack<TypeName> s2(s1);  // 以 s1 为模板定义一个栈 s2
 
 #### 以下所有函数均为常数复杂度
 
--    `top()` 访问栈顶元素（如果栈为空，此处会出错）
--    `push(x)` 向栈中插入元素 x
--    `pop()` 删除栈顶元素
--    `size()` 查询容器中的元素数量
--    `empty()` 询问容器是否为空
+-  `top()` 访问栈顶元素（如果栈为空，此处会出错）
+-  `push(x)` 向栈中插入元素 x
+-  `pop()` 删除栈顶元素
+-  `size()` 查询容器中的元素数量
+-  `empty()` 询问容器是否为空
 
 ### 简单示例
 
@@ -68,19 +68,19 @@ queue<TypeName> q2(q1);  // 以 q1 为模板定义一个队列 q2
 
 #### 以下所有函数均为常数复杂度
 
--    `front()` 访问队首元素（如果队列为空，此处会出错）
--    `push(x)` 向队列中插入元素 x
--    `pop()` 删除队首元素
--    `size()` 查询容器中的元素数量
--    `empty()` 询问容器是否为空
+-  `front()` 访问队首元素（如果队列为空，此处会出错）
+-  `push(x)` 向队列中插入元素 x
+-  `pop()` 删除队首元素
+-  `size()` 查询容器中的元素数量
+-  `empty()` 询问容器是否为空
 
 ### 简单示例
 
 ```cpp
-stack<int> q1;
+queue<int> q1;
 q1.push(2);
 q1.push(1);
-stack<int> q2(q1);
+queue<int> q2(q1);
 q1.pop();
 std::cout << q1.size() << " " << q2.size() << endl;    // 1 2
 std::cout << q1.front() << " " << q2.front() << endl;  // 1 2
@@ -117,11 +117,11 @@ std::priority_queue<int, deque<int>, greater<int>> q3;
 
 ### 成员函数
 
-1.   `top()` : 访问栈顶元素 常数复杂度
-2.   `empty()` : 检查底层的容器是否为空 常数复杂度
-3.   `size()` : 返回底层容器的元素数量 常数复杂度
-4.   `push()` : 插入元素，并对底层容器排序 最坏 $\Theta(n)$ 均摊 $\Theta(\log(n))$ 
-5.   `pop()` : 删除第一个元素 最坏 $\Theta(\log(n))$ 
+1.  `top()` : 访问栈顶元素 常数复杂度
+2.  `empty()` : 检查底层的容器是否为空 常数复杂度
+3.  `size()` : 返回底层容器的元素数量 常数复杂度
+4.  `push()` : 插入元素，并对底层容器排序 最坏 $\Theta(n)$ 均摊 $\Theta(\log(n))$ 
+5.  `pop()` : 删除第一个元素 最坏 $\Theta(\log(n))$ 
 
 由于 `std::priority_queue` 原生不支持 `modify()` / `join()` / `erase()` 故不做讲解。
 

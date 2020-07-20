@@ -41,7 +41,7 @@ void dfs(int n, int i, int a) {
     for (int j = 1; j <= i - 1; ++j) printf("%d ", arr[j]);
     printf("\n");
   }
-  if (i < m) {
+  if (i <= m) {
     for (int j = a; j <= n; ++j) {
       arr[i] = j;
       dfs(n - j, i + 1, j);  // 请仔细思考该行含义。
@@ -55,17 +55,16 @@ dfs(n, 1, 1);
 
 ## 例题
 
- [Luogu P1706 全排列问题](https://www.luogu.org/problemnew/show/P1706) 
+ [Luogu P1706 全排列问题](https://www.luogu.com.cn/problem/P1706) 
 
 C++ 代码：
 
 ```cpp
-bool vis[N];  //访问标记数组
-int a[N];     //排列数组，按顺序储存当前搜索结果
+bool vis[N];  // 访问标记数组
+int a[N];     // 排列数组，按顺序储存当前搜索结果
 
 void dfs(int step) {
-  if (step == n + 1)  //边界
-  {
+  if (step == n + 1) {  // 边界
     for (int i = 1; i <= n; i++) {
       cout << setw(5) << a[i];
     }

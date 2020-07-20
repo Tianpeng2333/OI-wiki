@@ -6,12 +6,10 @@
 
 -   消除循环中的低效率，比如遍历字符串的时候：
     ```cpp
-    for (int i = 0; i < strlen(s); ++i)
-      ;
+    /* clang-format off */
+    for (int i = 0; i < strlen(s); ++i);
     // 不如
-    int len = strlen(s);
-    for (int i = 0; i < len; ++i)
-      ;
+    for (int i = 0, len = strlen(s); i < len; ++i);
     ```
 -   循环展开。通过适当的循环展开可以减少整个计算中关键路径上的操作数量
     ```cpp
@@ -30,9 +28,10 @@
     ```
 -   重新结合变换，增加了可以并行执行的运算数量
     ```cpp
-    for (int i = 0; i < n; ++i) res = (res OP a[i])OP a[i + 1];
+    // 当然，加号可以换成其他的运算符
+    for (int i = 0; i < n; ++i) res = (res + a[i]) + a[i + 1];
     // 不如
-    for (int i = 0; i < n; ++i) res = res OP(a[i] OP a[i + 1]);
+    for (int i = 0; i < n; ++i) res = res + (a[i] + a[i + 1]);
     ```
 
 ## 循环宏定义
@@ -53,7 +52,7 @@ for (int i = 0; i < N; i++) {
 这样写循环代码时，就可以简化成 `f(i, 0, N)` 。例如：
 
 ```cpp
-// b is a STL container
+// a is a STL container
 f(i, 0, a.size()) { ... }
 ```
 
@@ -69,63 +68,62 @@ f(i, 0, a.size()) { ... }
 
 使用 namespace 能使程序可读性更好，便于调试。
 
-```cpp
-// NOI 2018 屠龙勇士 40分部分分代码
-#include <algorithm>
-#include <cmath>
-#include <cstring>
-#include <iostream>
-using namespace std;
-long long n, m, a[100005], p[100005], aw[100005], atk[100005];
-namespace one_game {
-//其实namespace里也可以声明变量
-void solve() {
-  for (int y = 0;; y++)
-    if ((a[1] + p[1] * y) % atk[1] == 0) {
-      cout << (a[1] + p[1] * y) / atk[1] << endl;
-      return;
+??? note "示例代码"
+    ```cpp
+    // NOI 2018 屠龙勇士 40分部分分代码
+    #include <algorithm>
+    #include <cmath>
+    #include <cstring>
+    #include <iostream>
+    using namespace std;
+    long long n, m, a[100005], p[100005], aw[100005], atk[100005];
+    namespace one_game {
+    // 其实namespace里也可以声明变量
+    void solve() {
+      for (int y = 0;; y++)
+        if ((a[1] + p[1] * y) % atk[1] == 0) {
+          cout << (a[1] + p[1] * y) / atk[1] << endl;
+          return;
+        }
     }
-}
-}  // namespace one_game
-namespace p_1 {
-void solve() {
-  if (atk[1] == 1)  // solve 1-2
-  {
-    sort(a + 1, a + n + 1);
-    cout << a[n] << endl;
-    return;
-  } else if (m == 1)  // solve 3-4
-  {
-    long long k = atk[1], kt = ceil(a[1] * 1.0 / k);
-    for (int i = 2; i <= n; i++)
-      k = aw[i - 1], kt = max(kt, (long long)ceil(a[i] * 1.0 / k));
-    cout << k << endl;
-  }
-}
-}  // namespace p_1
-int main() {
-  int T;
-  cin >> T;
-  while (T--) {
-    memset(a, 0, sizeof(a));
-    memset(p, 0, sizeof(p));
-    memset(aw, 0, sizeof(aw));
-    memset(atk, 0, sizeof(atk));
-    cin >> n >> m;
-    for (int i = 1; i <= n; i++) cin >> a[i];
-    for (int i = 1; i <= n; i++) cin >> p[i];
-    for (int i = 1; i <= n; i++) cin >> aw[i];
-    for (int i = 1; i <= m; i++) cin >> atk[i];
-    if (n == 1 && m == 1)
-      one_game::solve();  // solve 8-13
-    else if (p[1] == 1)
-      p_1::solve();  // solve 1-4 or 14-15
-    else
-      cout << -1 << endl;
-  }
-  return 0;
-}
-```
+    }  // namespace one_game
+    namespace p_1 {
+    void solve() {
+      if (atk[1] == 1) {  // solve 1-2
+        sort(a + 1, a + n + 1);
+        cout << a[n] << endl;
+        return;
+      } else if (m == 1) {  // solve 3-4
+        long long k = atk[1], kt = ceil(a[1] * 1.0 / k);
+        for (int i = 2; i <= n; i++)
+          k = aw[i - 1], kt = max(kt, (long long)ceil(a[i] * 1.0 / k));
+        cout << k << endl;
+      }
+    }
+    }  // namespace p_1
+    int main() {
+      int T;
+      cin >> T;
+      while (T--) {
+        memset(a, 0, sizeof(a));
+        memset(p, 0, sizeof(p));
+        memset(aw, 0, sizeof(aw));
+        memset(atk, 0, sizeof(atk));
+        cin >> n >> m;
+        for (int i = 1; i <= n; i++) cin >> a[i];
+        for (int i = 1; i <= n; i++) cin >> p[i];
+        for (int i = 1; i <= n; i++) cin >> aw[i];
+        for (int i = 1; i <= m; i++) cin >> atk[i];
+        if (n == 1 && m == 1)
+          one_game::solve();  // solve 8-13
+        else if (p[1] == 1)
+          p_1::solve();  // solve 1-4 or 14-15
+        else
+          cout << -1 << endl;
+      }
+      return 0;
+    }
+    ```
 
 ## 善用标识符进行调试
 
@@ -175,18 +173,18 @@ int main() {
 #include <stdlib.h>
 int main() {
   // For Windows
-  //对拍时不开文件输入输出
-  //当然，这段程序也可以改写成批处理的形式
+  // 对拍时不开文件输入输出
+  // 当然，这段程序也可以改写成批处理的形式
   while (1) {
-    system("gen > test.in");  //数据生成器将生成数据写入输入文件
-    system("test1.exe < test.in > a.out");  //获取程序1输出
-    system("test2.exe < test.in > b.out");  //获取程序2输出
+    system("gen > test.in");  // 数据生成器将生成数据写入输入文件
+    system("test1.exe < test.in > a.out");  // 获取程序1输出
+    system("test2.exe < test.in > b.out");  // 获取程序2输出
     if (system("fc a.out b.out")) {
-      //该行语句比对输入输出
+      // 该行语句比对输入输出
       // fc返回0时表示输出一致，否则表示有不同处
-      system("pause");  //方便查看不同处
+      system("pause");  // 方便查看不同处
       return 0;
-      //该输入数据已经存放在test.in文件中，可以直接利用进行调试
+      // 该输入数据已经存放在test.in文件中，可以直接利用进行调试
     }
   }
 }
@@ -218,4 +216,4 @@ inline Node* newnode() {
 }
 ```
 
-注：本页面 [部分内容](https://github.com/24OI/OI-wiki/commit/e9fa69af9d7f1583cb5ddad837c04bb1b03d7939) 最初发表于 [洛谷日报 #86](https://studyingfather.blog.luogu.org/some-coding-tips-for-oiers) ，由原作者整理并搬运至此，略有删改。
+注：本页面 [部分内容](https://github.com/OI-wiki/OI-wiki/commit/e9fa69af9d7f1583cb5ddad837c04bb1b03d7939) 最初发表于 [洛谷日报 #86](https://studyingfather.blog.luogu.org/some-coding-tips-for-oiers) ，由原作者整理并搬运至此，略有删改。

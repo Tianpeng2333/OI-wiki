@@ -2,11 +2,11 @@
 
 大部分的可持久化 Trie 题中，Trie 都是以 01-Trie 的形式出现的。
 
-??? note " 例题[最大异或和](https://www.luogu.org/problem/P4735)"
+??? note " 例题[最大异或和](https://www.luogu.com.cn/problem/P4735)"
     对一个长度为 $n$ 的数组 $a$ 维护以下操作：
-
-    1.  在数组的末尾添加一个数 $x$ ，数组的长度 $n$ 自增 $1$ 。
-    2.  给出查询区间 $[l,r]$ 和一个值 $k$ ，求当 $l\le p\le r$ 时， $k \oplus \bigoplus^{n}_{i=p} a_i$ 。
+    
+    1. 在数组的末尾添加一个数 $x$ ，数组的长度 $n$ 自增 $1$ 。
+    2. 给出查询区间 $[l,r]$ 和一个值 $k$ ，求当 $l\le p\le r$ 时， $k \oplus \bigoplus^{n}_{i=p} a_i$ 。
 
 这个求的值可能有些麻烦，利用常用的处理连续异或的方法，记 $s_x=\bigoplus_{i=1}^x a_i$ ，则原式等价于 $s_{p-1}\oplus s_n\oplus k$ ，观察到 $s_n \oplus k$ 在查询的过程中是固定的，题目的查询变化为查询在区间 $[l-1,r-1]$ 中异或定值（ $s_n\oplus k$ ）的最大值。
 
@@ -26,7 +26,7 @@ struct Trie {
   int cnt, rt[maxn], ch[maxn * 33][2], val[maxn * 33];
   void insert(int o, int lst, int v) {
     for (int i = 28; i >= 0; i--) {
-      val[o] = val[lst] + 1;  //在原版本的基础上更新
+      val[o] = val[lst] + 1;  // 在原版本的基础上更新
       if ((v & (1 << i)) == 0) {
         if (!ch[o][0]) ch[o][0] = ++cnt;
         ch[o][1] = ch[lst][1];
@@ -48,7 +48,8 @@ struct Trie {
       // printf("%d %d %d\n",o1,o2,val[o1]-val[o2]);
       int t = ((v & (1 << i)) ? 1 : 0);
       if (val[ch[o1][!t]] - val[ch[o2][!t]])
-        ret += (1 << i), o1 = ch[o1][!t], o2 = ch[o2][!t];  //尽量向不同的地方跳
+        ret += (1 << i), o1 = ch[o1][!t],
+                         o2 = ch[o2][!t];  // 尽量向不同的地方跳
       else
         o1 = ch[o1][t], o2 = ch[o2][t];
     }
@@ -74,7 +75,7 @@ int main() {
       l--;
       r--;
       if (l == r && l == 0)
-        printf("%d\n", s[n] ^ x);  //记得处理 l=r=1 的情况
+        printf("%d\n", s[n] ^ x);  // 记得处理 l=r=1 的情况
       else
         printf("%d\n", st.query(st.rt[r], st.rt[max(l - 1, 0)], x ^ s[n]));
     }

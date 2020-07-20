@@ -14,7 +14,7 @@ author: ouuan, Ir1d, TrisolarisHD, Xeonacid
 
 顺带提一句，“gty 的妹子树”的树分块做法可以被菊花图卡掉。
 
-###  [BZOJ4763 雪辉](https://www.luogu.org/problem/P3603) 
+###  [BZOJ4763 雪辉](https://www.luogu.com.cn/problem/P3603) 
 
 先进行树分块，然后对每个块的关键点，预处理出它到祖先中每个关键点的路径上颜色的 bitset，以及每个关键点的最近关键点祖先，复杂度是 $O(n\sqrt n+\frac{nc}{32})$ ，其中 $n\sqrt n$ 是暴力从每个关键点向上跳的复杂度， $\frac{nc}{32}$ 是把 $O(n)$ 个 `bitset` 存下来的复杂度。
 
@@ -78,8 +78,7 @@ author: ouuan, Ir1d, TrisolarisHD, Xeonacid
       keyid[1] = tot;
       while (top) bl[sta[top--]] = tot;
     
-      for (i = 1; i <= tot; ++i)  //预处理
-      {
+      for (i = 1; i <= tot; ++i) {  // 预处理
         if (vis[key[i]]) continue;
         vis[key[i]] = true;
         temp.reset();
@@ -101,14 +100,13 @@ author: ouuan, Ir1d, TrisolarisHD, Xeonacid
     
           while (key[bl[x]] != key[bl[y]]) {
             if (dep[key[bl[x]]] > dep[key[bl[y]]]) {
-              if (x == u)  //若是第一次跳先暴力跳到关键点
-              {
+              if (x == u) {  // 若是第一次跳先暴力跳到关键点
                 while (x != key[bl[u]]) {
                   temp[c[x]] = 1;
                   x = fa[x];
                 }
               } else
-                x = p[x];  //否则跳一整块
+                x = p[x];  // 否则跳一整块
             } else {
               if (y == v) {
                 while (y != key[bl[v]]) {

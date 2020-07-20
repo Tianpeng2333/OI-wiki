@@ -28,7 +28,7 @@ std::cin.tie(0);
 
  `scanf` 和 `printf` 依然有优化的空间，这就是本章所介绍的内容——读入和输出优化。
 
--   注意，本页面中介绍的读入和输出优化均针对整型数据，若要支持其他类型的数据（如浮点数），可自行按照本页面介绍的优化原理来编写代码。
+- 注意，本页面中介绍的读入和输出优化均针对整型数据，若要支持其他类型的数据（如浮点数），可自行按照本页面介绍的优化原理来编写代码。
 
 ### 原理
 
@@ -63,7 +63,7 @@ int read() {
 }
 ```
 
--   举例
+- 举例
 
 读入 num 可写为 `num=read();` 
 
@@ -80,7 +80,7 @@ int read() {
 ### 代码实现
 
 ```cpp
-int write(int x) {
+void write(int x) {
   if (x < 0) {  // 判负 + 输出负号 + 变原数为正数
     x = -x;
     putchar('-');
@@ -103,7 +103,7 @@ inline void write(int x) {
 }
 ```
 
--   举例
+- 举例
 
 输出 num 可写为 `write(num);` 
 
@@ -180,12 +180,12 @@ inline void write(int x) {
 
 ### 刷新缓冲区
 
-1.  程序结束
-2.  关闭文件
-3.   `printf` 输出 `\r` 或者 `\n` 到终端的时候（注：如果是输出到文件，则不会刷新缓冲区）
-4.  手动 `fflush()` 
-5.  缓冲区满自动刷新
-6.   `cout` 输出 `endl` 
+1. 程序结束
+2. 关闭文件
+3.  `printf` 输出 `\r` 或者 `\n` 到终端的时候（注：如果是输出到文件，则不会刷新缓冲区）
+4. 手动 `fflush()` 
+5. 缓冲区满自动刷新
+6.  `cout` 输出 `endl` 
 
 ## 使输入输出优化更为通用
 
@@ -194,8 +194,8 @@ inline void write(int x) {
 ```cpp
 template <typename T>
 inline T
-read() {  //声明 template 类,要求提供输入的类型T,并以此类型定义内联函数 read()
-  T sum = 0, fl = 1;  //将 sum,fl 和 ch 以输入的类型定义
+read() {  // 声明 template 类,要求提供输入的类型T,并以此类型定义内联函数 read()
+  T sum = 0, fl = 1;  // 将 sum,fl 和 ch 以输入的类型定义
   int ch = getchar();
   for (; !isdigit(ch); ch = getchar())
     if (ch == '-') fl = -1;
@@ -221,7 +221,7 @@ c = read<__int128>();
 若要开启文件读写时，请在所有读写之前加入 `freopen()` 。
 
 ```cpp
-// #define DEBUG 1  //调试开关
+// #define DEBUG 1  // 调试开关
 struct IO {
 #define MAXSIZE (1 << 20)
 #define isdigit(x) (x >= '0' && x <= '9')
@@ -233,7 +233,7 @@ struct IO {
   ~IO() { fwrite(pbuf, 1, pp - pbuf, stdout); }
 #endif
   inline char gc() {
-#if DEBUG  //调试，可显示字符
+#if DEBUG  // 调试，可显示字符
     return getchar();
 #endif
     if (p1 == p2) p2 = (p1 = buf) + fread(buf, 1, MAXSIZE, stdin);
@@ -268,7 +268,7 @@ struct IO {
       ;
   }
   inline void push(const char &c) {
-#if DEBUG  //调试，可显示字符
+#if DEBUG  // 调试，可显示字符
     putchar(c);
 #else
     if (pp - pbuf == MAXSIZE) fwrite(pbuf, 1, MAXSIZE, stdout), pp = pbuf;

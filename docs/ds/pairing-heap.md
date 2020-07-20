@@ -15,7 +15,7 @@
 
 ### 各项操作的实现
 
-#### 存储结构定	义
+#### 存储结构定义
 
 就是普通的带权多叉树的表示方式。
 
@@ -23,7 +23,7 @@
 struct Node {
   T v;            // T为权值类型
   Node *ch, *xd;  // ch为该节点儿子的指针，xd为该节点兄弟的指针。
-                  //若该节点没有儿子/兄弟则指针指向虚拟空节点。
+                  // 若该节点没有儿子/兄弟则指针指向虚拟空节点。
 };
 ```
 
@@ -43,7 +43,7 @@ Node* merge(Node* a, Node* b) {
   if (a == node) return b;
   if (b == node) return a;
   if (a->v > b->v) swap(a, b);  // swap后a为权值小的堆，b为权值大的堆
-  //将b设为a的儿子
+  // 将b设为a的儿子
   b->xd = a->ch;
   a->ch = b;
   return a;
@@ -65,18 +65,18 @@ Node* merge(Node* a, Node* b) {
 ```cpp
 Node* merges(Node* x) {
   if (x == node || x->xd == node)
-    return x;  //如果该树为空或他没有兄弟（即他的父亲的儿子数小于2），就直接return。
+    return x;  // 如果该树为空或他没有兄弟（即他的父亲的儿子数小于2），就直接return。
   Node *a = x->xd, *b = a->xd;  // a：x的一个兄弟，b：x的另一个兄弟
-  x->xd = a->xd = node;         //拆散
-  return merge(merge(x, a), merges(b));  //核心部分
+  x->xd = a->xd = node;         // 拆散
+  return merge(merge(x, a), merges(b));  // 核心部分
 }
 ```
 
 最后一句话是该函数的核心，这句话分三部分：
 
-1.   `merge(x,a)` “配对”了 x 和 a。
-2.   `merges(b)` 递归合并 b 和他的兄弟们。
-3.  将上面 2 个操作产生的 2 个新树合并。
+1.  `merge(x,a)` “配对”了 x 和 a。
+2.  `merges(b)` 递归合并 b 和他的兄弟们。
+3. 将上面 2 个操作产生的 2 个新树合并。
 
 需要注意到的是，上文提到了配对方向和合并方向是有要求的（从左往右配对，从右往左合并），该递归函数的实现已保证了这个顺序，如果读者需要自行实现迭代版本的话请务必注意保证该顺序，否则复杂度将失去保证。
 
@@ -95,7 +95,7 @@ Node* delete_min(Node* x) { return merges(x->ch); }
 struct Node {
   T v;
   Node *ch, *xd;
-  Node *fa;  //新增：fa指针，指向该节点的父亲，若该节点为根节点则指向虚拟空节点
+  Node *fa;  // 新增：fa指针，指向该节点的父亲，若该节点为根节点则指向虚拟空节点
 };
 ```
 
@@ -107,9 +107,9 @@ Node* merge(Node* a, Node* b) {
   if (b == node) return a;
   if (a->v > b->v) swap(a, b);
   a->fa = node;
-  b->fa = node;  //新增：维护fa指针
+  b->fa = node;  // 新增：维护fa指针
   b->xd = a->ch;
-  a->ch->fa = b;  //新增：维护fa指针
+  a->ch->fa = b;  // 新增：维护fa指针
   a->ch = b;
   return a;
 }
@@ -119,11 +119,11 @@ Node* merge(Node* a, Node* b) {
 
 ```cpp
 Node* merges(Node* x) {
-  x->fa = node;  //新增：维护fa指针
+  x->fa = node;  // 新增：维护fa指针
   if (x == node || x->xd == node) return x;
   Node *a = x->xd, *b = a->xd;
   x->xd = a->xd = node;
-  a->fa = node;  //新增：维护fa指针
+  a->fa = node;  // 新增：维护fa指针
   return merge(merge(x, a), merges(b));
 }
 ```
@@ -137,9 +137,9 @@ Node* merges(Node* x) {
 // root为堆的根，x为要操作的节点，v为新的权值，调用时需保证x->v<=v
 //返回值为新的根节点
 Node* decrease - key(Node* root, Node* x, LL v) {
-  x->v = v;                     //修改权值
-  if (x->fa == node) return x;  //如果x为根，就不用接下去的步骤了。
-  //把x从fa的子节点中剖出去，这里要分x的位置讨论一下。
+  x->v = v;                     // 修改权值
+  if (x->fa == node) return x;  // 如果x为根，就不用接下去的步骤了。
+  // 把x从fa的子节点中剖出去，这里要分x的位置讨论一下。
   if (x->fa->ch == x)
     x->fa->ch = x->xd;
   else
@@ -147,7 +147,7 @@ Node* decrease - key(Node* root, Node* x, LL v) {
   x->xd->fa = x->fa;
   x->xd = node;
   x->fa = node;
-  return merge(root, x);  //合并root和x。
+  return merge(root, x);  // 合并root和x。
 }
 ```
 
@@ -157,9 +157,9 @@ Node* decrease - key(Node* root, Node* x, LL v) {
 
 ### 参考文献
 
-1.   [HOOCCOOH 的题解](https://hooccooh.blog.luogu.org/solution-p3377) 
-2.  集训队论文《黄源河 -- 左偏树的特点及其应用》
-3.   [《配对堆中文版》](https://wenku.baidu.com/view/f2527bc2bb4cf7ec4afed06d.html) 
-4.   [维基百科 pairing heap 词条](https://en.wikipedia.org/wiki/Pairing_heap) 
-5.   <https://blog.csdn.net/luofeixiongsix/article/details/50640668> 
-6.   <https://brilliant.org/wiki/pairing-heap/> （注：本条目所有图片均来自这里）
+1.  [HOOCCOOH 的题解](https://hooccooh.blog.luogu.org/solution-p3377) 
+2. 集训队论文《黄源河 -- 左偏树的特点及其应用》
+3.  [《配对堆中文版》](https://wenku.baidu.com/view/f2527bc2bb4cf7ec4afed06d.html) 
+4.  [维基百科 pairing heap 词条](https://en.wikipedia.org/wiki/Pairing_heap) 
+5.  <https://blog.csdn.net/luofeixiongsix/article/details/50640668> 
+6.  <https://brilliant.org/wiki/pairing-heap/> （注：本条目所有图片均来自这里）

@@ -1,8 +1,8 @@
-## Description
+## 描述
 
 给定多项式 $f\left(x\right),g\left(x\right)$ ，求 $g\left(x\right)$ 除 $f\left(x\right)$ 的商 $Q\left(x\right)$ 和余数 $R\left(x\right)$ 。
 
-## Method
+## 解法
 
 发现若能消除 $R\left(x\right)$ 的影响则可直接 [ **多项式求逆** ](../inv) 解决。
 
@@ -20,7 +20,7 @@ $$
 
 $$
 \begin{aligned}
-    x^{n}f\left(\frac{1}{x}\right)&=x^{n-m}Q\left(x\right)x^{m}g\left(x\right)+x^{n-m+1}x^{m-1}R\left(x\right)\\
+    x^{n}f\left(\frac{1}{x}\right)&=x^{n-m}Q\left(\frac{1}{x}\right)x^{m}g\left(\frac{1}{x}\right)+x^{n-m+1}x^{m-1}R\left(\frac{1}{x}\right)\\
     f^{R}\left(x\right)&=Q^{R}\left(x\right)g^{R}\left(x\right)+x^{n-m+1}R^{R}\left(x\right)
 \end{aligned}
 $$

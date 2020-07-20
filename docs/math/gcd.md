@@ -8,7 +8,7 @@
 
 那么如何求最大公约数呢？我们先考虑两个数的情况。
 
-### 欧几里德算法
+### 欧几里得算法
 
 如果我们已知两个数 $a$ 和 $b$ ，如何求出二者的最大公约数呢？
 
@@ -21,11 +21,11 @@
 
 * * *
 
-设 $a=bk+c$ ，显然有 $c=a \bmod b$ 。设 $d|a\ \ \ d|b$ ，则 $c=a-bk$  $\frac{c}{d}=\frac{a}{d}-\frac{b}{d}k$ 由右边的式子可知 $\frac{c}{d}$ 为整数，即 $d|c$ 所以对于 $a,b$ 的公约数，它也会是 $a \bmod b$ 的公约数。
+设 $a=bk+c$ ，显然有 $c=a \bmod b$ 。设 $d \mid a\ \ \ d \mid b$ ，则 $c=a-bk$  $\frac{c}{d}=\frac{a}{d}-\frac{b}{d}k$ 由右边的式子可知 $\frac{c}{d}$ 为整数，即 $d \mid c$ 所以对于 $a,b$ 的公约数，它也会是 $a \bmod b$ 的公约数。
 
 反过来也需要证明
 
-设 $d|b\ \ \ d|(a \bmod b)$ ，我们还是可以像之前一样得到以下式子 $\frac{a\bmod b}{d}=\frac{a}{d}-\frac{b}{d}k$  $\frac{a\bmod b}{d}+\frac{b}{d}k=\frac{a}{d}$ 因为左边式子显然为整数，所以 $\frac{a}{d}$ 也为整数，即 $d|a$ ，所以 $b,a\bmod b$ 的公约数也是 $a,b$ 的公约数。
+设 $d \mid b\ \ \ d \mid (a \bmod b)$ ，我们还是可以像之前一样得到以下式子 $\frac{a\bmod b}{d}=\frac{a}{d}-\frac{b}{d}k$  $\frac{a\bmod b}{d}+\frac{b}{d}k=\frac{a}{d}$ 因为左边式子显然为整数，所以 $\frac{a}{d}$ 也为整数，即 $d \mid a$ ，所以 $b,a\bmod b$ 的公约数也是 $a,b$ 的公约数。
 
 既然两式公约数都是相同的，那么最大公约数也会相同。
 
@@ -42,9 +42,24 @@ int gcd(int a, int b) {
 
 递归至 `b==0` （即上一步的 `a%b==0` ) 的情况再返回值即可。
 
-上述算法被称作欧几里德算法（Euclidean algorithm）。
+上述算法被称作欧几里得算法（Euclidean algorithm）。
 
 如果两个数 $a$ 和 $b$ 满足 $\gcd(a, b) = 1$ ，我们称 $a$ 和 $b$ 互质。
+
+* * *
+
+欧几里得算法的时间效率如何呢？下面我们证明，欧几里得算法的时间复杂度为 $O(\log n)$ 。
+
+当我们求 $\gcd(a,b)$ 的时候，会遇到两种情况：
+
+-  $a < b$ ，这时候 $\gcd(a,b)=\gcd(b,a)$ ；
+-  $a \geq b$ ，这时候 $\gcd(a,b)=\gcd(b,a \bmod b)$ ，而对 $a$ 取模会让 $a$ 至少折半。这意味着这一过程最多发生 $O(\log n)$ 次。
+
+第一种情况发生后一定会发生第二种情况，因此第一种情况的发生次数一定 **不多于** 第二种情况的发生次数。
+
+从而我们最多递归 $O(\log n)$ 次就可以得出结果。
+
+事实上，假如我们试着用欧几里得算法去求 [斐波那契数列](./fibonacci.md) 相邻两项的最大公约数，会让该算法达到最坏复杂度。
 
 ### 多个数的最大公约数
 
@@ -62,17 +77,17 @@ int gcd(int a, int b) {
 
 用数学公式来表示就是 $x = p_1^{k_1}p_2^{k_2} \cdots p_s^{k_s}$ 
 
-设 $a = p_{a_1}^{k_{a_1}}p_{a_2}^{k_{a_2}} \cdots p_{a_s}^{k_{a_s}}$ , $b = p_{b_1}^{k_{b_1}}p_{b_2}^{k_{b_2}} \cdots p_{b_s}^{k_{b_s}}$ 
+设 $a = p_1^{k_{a_1}}p_2^{k_{a_2}} \cdots p_s^{k_{a_s}}$ , $b = p_1^{k_{b_1}}p_2^{k_{b_2}} \cdots p_s^{k_{b_s}}$ 
 
 我们发现，对于 $a$ 和 $b$ 的情况，二者的最大公约数等于
 
- $p_1^{k_{\min(a_1, b_1)}}p_2^{k_{\min(a_2, b_2)}} \cdots p_s^{k_{\min(a_s, b_s)}}$ 
+ $p_1^{\min(k_{a_1}, k_{b_1})}p_2^{\min(k_{a_2}, k_{b_2})} \cdots p_s^{\min(k_{a_s}, k_{b_s})}$ 
 
 最小公倍数等于
 
- $p_1^{k_{\max(a_1, b_1)}}p_2^{k_{\max(a_2, b_2)}} \cdots p_s^{k_{\max(a_s, b_s)}}$ 
+ $p_1^{\max(k_{a_1}, k_{b_1})}p_2^{\max(k_{a_2}, k_{b_2})} \cdots p_s^{\max(k_{a_s}, k_{b_s})}$ 
 
-由于 $a + b = \max(a, b) + \min(a, b)$ 
+由于 $k_a + k_b = \max(k_a, k_b) + \min(k_a, k_b)$ 
 
 所以得到结论是 $\gcd(a, b) \times \operatorname{lcm}(a, b) = a \times b$ 
 
@@ -84,7 +99,7 @@ int gcd(int a, int b) {
 
 ## 扩展欧几里得定理
 
-扩展欧几里德定理（Extended Euclidean algorithm, EXGCD），常用于求 $ax+by=\gcd(a,b)$ 的一组可行解。
+扩展欧几里得定理（Extended Euclidean algorithm, EXGCD），常用于求 $ax+by=\gcd(a,b)$ 的一组可行解。
 
 ## 证明
 

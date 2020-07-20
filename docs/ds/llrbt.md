@@ -8,9 +8,9 @@
 
 一棵红黑树满足如下性质：
 
-1.  节点是红色或黑色；
-2.  红色的节点的所有儿子的颜色必须是黑色，即从每个叶子到根的所有路径上不能有两个连续的红色节点；
-3.  从任一节点到其子树中的每个叶子的所有简单路径上都包含相同数目的黑色节点。（黑高平衡）
+1. 节点是红色或黑色；
+2. 红色的节点的所有儿子的颜色必须是黑色，即从每个叶子到根的所有路径上不能有两个连续的红色节点；
+3. 从任一节点到其子树中的每个叶子的所有简单路径上都包含相同数目的黑色节点。（黑高平衡）
 
 这保证了从根节点到任意叶子的最长路径（红黑交替）不会超过最短路径（全黑）的二倍。从而保证了树的平衡性。
 
@@ -24,8 +24,8 @@
 
 左偏红黑树对红黑树进行了进一步限制，一个黑色节点的左右儿子：
 
--   要么全是黑色；
--   要么左儿子是红色，右儿子是黑色。
+- 要么全是黑色；
+- 要么左儿子是红色，右儿子是黑色。
 
 符合条件的情况：
 
@@ -150,7 +150,7 @@
 
 我们首先考虑删除叶子：与删最小值类似，我们在删除任意值的过程中也要维护一个性质，不过这次比较特殊，因为我们不是只向左边走，而是可以向左右两个方向走，因此在删除过程中维护的性质是这样的：如果往左走，当前节点是 `h` ，那么需要保证 `h` 是红色，或者 `h->lc` 是红色；如果往右走，当前节点是 `h` ，那么需要保证 `h` 是红色，或者 `h->rc` 是红色。这样可以保证我们最后总会删掉一个红色节点。
 
-下面考虑删除非叶子节点，我们只需要找到其右子树（如果有）里的最大节点，然后用右子树的最大节点的值代替该节点的值，最后删除右子树里的最大节点。
+下面考虑删除非叶子节点，我们只需要找到其右子树（如果有）里的最小节点，然后用右子树的最小节点的值代替该节点的值，最后删除右子树里的最小节点。
 
 ![llrbt-9](./images/llrbt-9.png)
 
@@ -509,5 +509,5 @@
 
 ## 参考资料与拓展阅读
 
--    [Left-Leaning Red-Black Trees](https://www.cs.princeton.edu/~rs/talks/LLRB/RedBlack.pdf) -  Robert Sedgewick Princeton University
--    [Balanced Search Trees](https://algs4.cs.princeton.edu/lectures/33BalancedSearchTrees-2x2.pdf) -\_Algorithms_Robert Sedgewick | Kevin Wayne
+-  [Left-Leaning Red-Black Trees](https://www.cs.princeton.edu/~rs/talks/LLRB/RedBlack.pdf) -  Robert Sedgewick Princeton University
+-  [Balanced Search Trees](https://algs4.cs.princeton.edu/lectures/33BalancedSearchTrees-2x2.pdf) -\_Algorithms_Robert Sedgewick | Kevin Wayne

@@ -14,6 +14,8 @@ $$
 
 ## 求解
 
+### 二分法
+
 分数规划问题的通用方法是二分。
 
 假设我们要求最大值。二分一个答案 $mid$ ，然后推式子（为了方便少写了上下界）：
@@ -30,6 +32,10 @@ $$
 那么只要求出不等号左边的式子的最大值就行了。如果最大值比 $0$ 要大，说明 $mid$ 是可行的，否则不可行。
 
 求最小值的方法和求最大值的方法类似，读者不妨尝试着自己推一下。
+
+### Dinkelbach 算法
+
+Dinkelbach 算法的大概思想是每次用上一轮的答案当做新的 $L$ 来输入，不断地迭代，直至答案收敛。
 
 * * *
 
@@ -173,7 +179,7 @@ inline bool check(double mid) {
 另外本题存在一种复杂度 $O(nm)$ 的算法，如果有兴趣可以阅读 [这篇文章](https://www.cnblogs.com/y-clever/p/7043553.html) 。
 
 ```cpp
-inline int SPFA(int u, double mid) {  //判负环
+inline int SPFA(int u, double mid) {  // 判负环
   vis[u] = 1;
   for (int i = head[u]; i; i = e[i].nxt) {
     int v = e[i].v;
@@ -187,7 +193,7 @@ inline int SPFA(int u, double mid) {  //判负环
   return 0;
 }
 
-inline bool check(double mid) {  //如果有负环返回 true
+inline bool check(double mid) {  // 如果有负环返回 true
   for (int i = 1; i <= n; ++i) dis[i] = 0, vis[i] = 0;
   for (int i = 1; i <= n; ++i)
     if (SPFA(i, mid)) return 1;
@@ -203,6 +209,6 @@ inline bool check(double mid) {  //如果有负环返回 true
 
 ## 习题
 
--    [JSOI2016 最佳团体](https://loj.ac/problem/2071) 
--    [SDOI2017 新生舞会](https://loj.ac/problem/2003) 
--    [UVa1389 Hard Life](https://www.luogu.org/problem/UVA1389) 
+-  [JSOI2016 最佳团体](https://loj.ac/problem/2071) 
+-  [SDOI2017 新生舞会](https://loj.ac/problem/2003) 
+-  [UVa1389 Hard Life](https://www.luogu.com.cn/problem/UVA1389) 

@@ -10,7 +10,7 @@ ST 表是用于解决 **可重复贡献问题** 的数据结构。
 
 ## 引入
 
- [ST 表模板题](https://www.luogu.org/problemnew/show/P3865) 
+ [ST 表模板题](https://www.luogu.com.cn/problem/P3865) 
 
 题目大意：给定 $n$ 个数，有 $m$ 个询问，对于每个询问，你需要回答区间 $[l,r]$ 中的最大值。
 
@@ -20,7 +20,7 @@ ST 表是用于解决 **可重复贡献问题** 的数据结构。
 
 ## ST 表
 
-ST 表基于 [倍增](../basic/binary-acc.md) 思想，可以做到 $\Theta(n\log n)$ 预处理， $\Theta(1)$ 回答每个询问。但是不支持修改操作。
+ST 表基于 [倍增](../basic/binary-lifting.md) 思想，可以做到 $\Theta(n\log n)$ 预处理， $\Theta(1)$ 回答每个询问。但是不支持修改操作。
 
 基于倍增思想，我们考虑如何求出区间最大值。可以发现，如果按照一般的倍增流程，每次跳 $2^i$ 步的话，询问时的复杂度仍旧是 $\Theta(\log n)$ ，并没有比线段树更优，反而预处理一步还比线段树慢。
 
@@ -48,7 +48,7 @@ ST 表基于 [倍增](../basic/binary-acc.md) 思想，可以做到 $\Theta(n\lo
 
 ## 模板代码
 
- [ST 表模板题](https://www.luogu.org/problemnew/show/P3865) 
+ [ST 表模板题](https://www.luogu.com.cn/problem/P3865) 
 
 ```cpp
 #include <bits/stdc++.h>
@@ -94,9 +94,9 @@ int main() {
 
 ## 注意点
 
-1.  输入输出数据一般很多，建议开启输入输出优化。
+1. 输入输出数据一般很多，建议开启输入输出优化。
 
-2.  每次用 [std::log](https://en.cppreference.com/w/cpp/numeric/math/log) 重新计算 log 函数值并不值得，建议进行如下的预处理：
+2. 每次用 [std::log](https://en.cppreference.com/w/cpp/numeric/math/log) 重新计算 log 函数值并不值得，建议进行如下的预处理：
 
 $$
 \left\{\begin{aligned}
@@ -119,11 +119,11 @@ ST 表能较好的维护“可重复贡献”的区间信息（同时也应满�
 
 ## 练习
 
- [RMQ 模板题](https://www.luogu.org/problemnew/show/P3865) 
+ [RMQ 模板题](https://www.luogu.com.cn/problem/P3865) 
 
  [「SCOI2007」降雨量](https://loj.ac/problem/2279) 
 
- [\[USACO07JAN\]平衡的阵容 Balanced Lineup](https://www.luogu.org/problem/P2880) 
+ [\[USACO07JAN\]平衡的阵容 Balanced Lineup](https://www.luogu.com.cn/problem/P2880) 
 
 ## 附录：ST 表求区间 GCD 的时间复杂度分析
 
@@ -139,13 +139,13 @@ ST 表能较好的维护“可重复贡献”的区间信息（同时也应满�
 
 ??? note "更严谨的证明"
     理解本段，可能需要具备 [时间复杂度](../misc/complexity.md) 的关于“势能分析法”的知识。
-
+    
     先分析预处理部分的时间复杂度：
-
+    
     设“待考虑数列”为在预处理 ST 表的时候当前层循环的数列。例如，第零层的数列就是原数列，第一层的数列就是第零层的数列经过一次迭代之后的数列，即 `st[1..n][1]` ，我们将其记为 $A$ 。
-
+    
     而势能函数就定义为“待考虑数列”中所有数的累乘的以二为底的对数。即： $\Phi(A)=\log_2\left(\prod\limits_{i=1}^n A_i\right)$ 。
-
+    
     在一次迭代中，所花费的时间相当于迭代循环所花费的时间与 GCD 所花费的时间之和。其中，GCD 花费的时间有长有短。最短可能只有两次甚至一次递归，而最长可能有 $O(\log w)$ 次递归。但是，GCD 过程中，除最开头一层与最末一层以外，每次递归都会使“待考虑数列”中的某个结果至少减半。即， $\Phi(A)$ 会减少至少 $1$ ，该层递归所用的时间可以被势能函数均摊。
-
+    
     同时，我们可以看到， $\Phi(A)$ 的初值最大为 $\log_2 (w^n)=\Theta(n\log w)$ ，而 $\Phi(A)$ 不增。所以，ST 表预处理部分的时间复杂度为 $O(n(\log w+\log n))$ 。

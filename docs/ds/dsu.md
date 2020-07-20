@@ -3,11 +3,12 @@ author: HeRaNO, JuicyMio, Xeonacid, sailordiary, ouuan
 并查集是一种树形的数据结构，顾名思义，它用于处理一些不交集的 **合并** 及 **查询** 问题。
 它支持两种操作：
 
--   查找（Find）：确定某个元素处于哪个子集；
+- 查找（Find）：确定某个元素处于哪个子集；
 
--   合并（Union）：将两个子集合并成一个集合。
+- 合并（Union）：将两个子集合并成一个集合。
 
-\*也就是说，不支持集合的分离、删除。
+!!! warning
+    并查集不支持集合的分离，但是并查集在经过修改后可以支持集合中单个元素的删除操作（详见 UVA11987 Almost Union-Find）。使用动态开点线段树还可以实现可持久化并查集。
 
 ## 初始化
 
@@ -27,13 +28,13 @@ void makeSet(int size) {
 此处给出一种 C++ 的参考实现：
 
 ```cpp
-int fa[MAXN];  //记录某个人的爸爸是谁，特别规定，祖先的爸爸是他自己
+int fa[MAXN];  // 记录某个人的爸爸是谁，特别规定，祖先的爸爸是他自己
 int find(int x) {
-  //寻找x的祖先
-  if (fa[x] == x)  //如果x是祖先则返回
+  // 寻找x的祖先
+  if (fa[x] == x)  // 如果x是祖先则返回
     return x;
   else
-    return find(fa[x]);  //如果不是则x的爸爸问x的爷爷
+    return find(fa[x]);  // 如果不是则x的爸爸问x的爷爷
 }
 ```
 
@@ -48,7 +49,7 @@ int find(int x) {
 ```cpp
 int find(int x) {
   if (x != fa[x])  // x不是自身的父亲，即x不是该集合的代表
-    fa[x] = find(fa[x]);  //查找x的祖先直到找到代表,于是顺手路径压缩
+    fa[x] = find(fa[x]);  // 查找x的祖先直到找到代表,于是顺手路径压缩
   return fa[x];
 }
 ```
@@ -68,12 +69,12 @@ int find(int x) {
 
 ```cpp
 void unionSet(int x, int y) {
-  // x与y所在家族合并
+  // x 与 y 所在家族合并
   x = find(x);
   y = find(y);
-  if (x == y)  //原本就在一个家族里就不管了
+  if (x == y)  // 原本就在一个家族里就不管了
     return;
-  fa[x] = y;  //把x的祖先变成y的祖先的儿子
+  fa[x] = y;  // 把 x 的祖先变成 y 的祖先的儿子
 }
 ```
 
@@ -81,7 +82,7 @@ void unionSet(int x, int y) {
 
 一个祖先突然抖了个机灵：「你们家族人比较少，搬家到我们家族里比较方便，我们要是搬过去的话太费事了。」
 
-由于需要我们支持的只有集合的合并、查询操作，当我们需要将两个集合合二为一时，无论将哪一个集合连接到另一个集合的下面，都能得到正确的结果。但不同的连接方法存在时间复杂度的差异。具体来说，如果我们将一棵点数与深度都较小的集合树连接到一棵更大的集合树下，显然相比于另一种连接方案，其期望复杂度更优（也会带来更优的最坏复杂度）。
+由于需要我们支持的只有集合的合并、查询操作，当我们需要将两个集合合二为一时，无论将哪一个集合连接到另一个集合的下面，都能得到正确的结果。但不同的连接方法存在时间复杂度的差异。具体来说，如果我们将一棵点数与深度都较小的集合树连接到一棵更大的集合树下，显然相比于另一种连接方案，接下来执行查找操作的用时更小（也会带来更优的最坏时间复杂度）。
 
 当然，我们不总能遇到恰好如上所述的集合————点数与深度都更小。鉴于点数与深度这两个特征都很容易维护，我们常常从中择一，作为估价函数。而无论选择哪一个，时间复杂度都为 $\Theta (m\alpha(m,n))$ ，具体的证明可参见 References 中引用的论文。
 
@@ -92,11 +93,11 @@ void unionSet(int x, int y) {
 此处给出一种 C++ 的参考实现，其选择点数作为估价函数：
 
 ```cpp
-int size[N];  //记录子树的大小
+std::vector<int> size(N, 1);  // 记录并初始化子树的大小为 1
 void unionSet(int x, int y) {
   int xx = find(x), yy = find(y);
   if (xx == yy) return;
-  if (size[xx] > size[yy])  //保证小的合到大的里
+  if (size[xx] > size[yy])  // 保证小的合到大的里
     swap(xx, yy);
   fa[xx] = yy;
   size[yy] += size[xx];
@@ -107,7 +108,15 @@ void unionSet(int x, int y) {
 
 ### 时间复杂度
 
-同时使用路径压缩和启发式合并之后，并查集的每个操作平均时间仅为 $O(\alpha(n))$ ，其中 $\alpha$ 为 [阿克曼函数](https://en.wikipedia.org/wiki/Ackermann_function) 的反函数，其增长极其缓慢，也就是说其单次操作的平均运行时间可以认为是一个很小的常数。
+同时使用路径压缩和启发式合并之后，并查集的每个操作平均时间仅为 $O(\alpha(n))$ ，其中 $\alpha$ 为阿克曼函数的反函数，其增长极其缓慢，也就是说其单次操作的平均运行时间可以认为是一个很小的常数。
+
+ [Ackermann 函数](https://en.wikipedia.org/wiki/Ackermann_function)  $A(n, m)$ 的定义是这样的：
+
+ $A(m, n) = \begin{cases}n+1&\text{if }m=0\\A(m-1,1)&\text{if }m>0\text{ and }n=0\\A(m-1,A(m,n-1))&\text{otherwise}\end{cases}$ 
+
+而反 Ackermann 函数 $\alpha(n)$ 的定义是阿克曼函数的反函数，即为最大的整数 $m$ 使得 $A(m, m) \leqslant n$ 。
+
+时间复杂度的证明 [在这个页面中](./dsu-complexity.md) 。
 
 ### 空间复杂度
 
@@ -119,20 +128,23 @@ void unionSet(int x, int y) {
 
 ## 经典题目
 
- [「NOI2015」程序自动分析](http://uoj.ac/problem/127) 
+ [「NOI2015」程序自动分析](https://uoj.ac/problem/127) 
 
- [「JSOI2008」星球大战](https://www.luogu.org/problem/P1197) 
+ [「JSOI2008」星球大战](https://www.luogu.com.cn/problem/P1197) 
 
- [「NOI2001」食物链](https://www.luogu.org/problem/P2024) 
+ [「NOI2001」食物链](https://www.luogu.com.cn/problem/P2024) 
 
- [「NOI2002」银河英雄传说](https://www.luogu.org/problemnew/show/P1196) 
+ [「NOI2002」银河英雄传说](https://www.luogu.com.cn/problem/P1196) 
+
+ [UVA11987 Almost Union-Find](https://www.luogu.com.cn/problem/UVA11987) 
 
 ## 其他应用
 
- [最小生成树算法](../graph/mst.md) 中的 Kruskal 是基于并查集的算法。
+ [最小生成树算法](../graph/mst.md) 中的 Kruskal 和 [最近公共祖先](../graph/lca.md) 中的 Tarjan 算法是基于并查集的算法。
 
 ## References
 
--   [1]Tarjan, R. E., & Van Leeuwen, J. (1984). Worst-case analysis of set union algorithms. Journal of the ACM (JACM), 31(2), 245-281. [ResearchGate PDF](https://www.researchgate.net/profile/Jan_Van_Leeuwen2/publication/220430653_Worst-case_Analysis_of_Set_Union_Algorithms/links/0a85e53cd28bfdf5eb000000/Worst-case-Analysis-of-Set-Union-Algorithms.pdf) 
--   [2]Yao, A. C. (1985). On the expected performance of path compression algorithms. [SIAM Journal on Computing, 14(1), 129-133.](https://epubs.siam.org/doi/abs/10.1137/0214010?journalCode=smjcat) 
--   [3][知乎回答：是否在并查集中真的有二分路径压缩优化？]( <https://www.zhihu.com/question/28410263/answer/40966441> )
+- [1]Tarjan, R. E., & Van Leeuwen, J. (1984). Worst-case analysis of set union algorithms. Journal of the ACM (JACM), 31(2), 245-281. [ResearchGate PDF](https://www.researchgate.net/profile/Jan_Van_Leeuwen2/publication/220430653_Worst-case_Analysis_of_Set_Union_Algorithms/links/0a85e53cd28bfdf5eb000000/Worst-case-Analysis-of-Set-Union-Algorithms.pdf) 
+- [2]Yao, A. C. (1985). On the expected performance of path compression algorithms. [SIAM Journal on Computing, 14(1), 129-133.](https://epubs.siam.org/doi/abs/10.1137/0214010?journalCode=smjcat) 
+- [3][知乎回答：是否在并查集中真的有二分路径压缩优化？]( <https://www.zhihu.com/question/28410263/answer/40966441> )
+- [4]Gabow, H. N., & Tarjan, R. E. (1985). A Linear-Time Algorithm for a Special Case of Disjoint Set Union. JOURNAL OF COMPUTER AND SYSTEM SCIENCES, 30, 209-221. [CORE PDF](https://core.ac.uk/download/pdf/82125836.pdf) 

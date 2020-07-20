@@ -18,7 +18,7 @@
 
 将入度为 $0$ 的点组成一个集合 $S$ 
 
-每次从 $S$ 里面取出一个顶点 $v$ （可以随便取）放入 $L$ , 然后遍历顶点 $v$ 的所有边 $(u_1, v), (u_2, v), (u_3, v) \cdots$ , 并删除，并判断如果该边的另一个顶点，如果在移除这一条边后入度为 $0$ , 那么就将这个顶点放入集合 $L$ 中。不断地重复取出顶点然后……
+每次从 $S$ 里面取出一个顶点 $u$ （可以随便取）放入 $L$ , 然后遍历顶点 $u$ 的所有边 $(u, v_1), (u, v_2), (u, v_3) \cdots$ , 并删除，并判断如果该边的另一个顶点，如果在移除这一条边后入度为 $0$ , 那么就将这个顶点放入集合 $L$ 中。不断地重复取出顶点然后……
 
 最后当集合为空后，就检查图中是否存在任何边。如果有，那么这个图一定有环路，否者返回 $L$ , $L$ 中顺序就是拓扑排序的结果
 
@@ -60,24 +60,24 @@ else
 
 ```text
 bool toposort() {
-	q = new queue();
-	for (i = 0; i < n; i++)
-		if (in_deg[i] == 0) q.push(i);
-	ans = new vector();
-	while (!q.empty()) {
-		u = q.pop();
-		ans.push_back(u);
-		for each edge(u, v) {
-			if (--in_deg[v] == 0) q.push(v);
-		}
-	}
-	if (ans.size() == n) {
-		for (i = 0; i < n; i++)
-			std::cout << ans[i] << std::endl;
-		return true;
-	} else {
-		return false;
-	}
+  q = new queue();
+  for (i = 0; i < n; i++)
+    if (in_deg[i] == 0) q.push(i);
+  ans = new vector();
+  while (!q.empty()) {
+    u = q.pop();
+    ans.push_back(u);
+    for each edge(u, v) {
+      if (--in_deg[v] == 0) q.push(v);
+    }
+  }
+  if (ans.size() == n) {
+    for (i = 0; i < n; i++)
+      std::cout << ans[i] << std::endl;
+    return true;
+  } else {
+    return false;
+  }
 }
 ```
 
@@ -109,7 +109,7 @@ bool toposort() {
 }
 ```
 
-时间复杂度： $O(n+m)$ 空间复杂度： $O(n)$ 
+时间复杂度： $O(E+V)$ 空间复杂度： $O(V)$ 
 
 ### 合理性证明
 
@@ -121,8 +121,12 @@ bool toposort() {
 
 还可以用来判断图是否是一条链。
 
+### 求字典序最大/最小的拓扑排序
+
+将 Kahn 算法中的队列替换成最大堆/最小堆实现的优先队列即可，此时总的时间复杂度为 $O(E+V \log{V})$ 。
+
 ## 参考
 
-1.  离散数学及其应用。ISBN:9787111555391
-2.   <https://blog.csdn.net/dm_vincent/article/details/7714519> 
-3.  Topological sorting, <https://en.wikipedia.org/w/index.php?title=Topological_sorting&oldid=854351542> 
+1. 离散数学及其应用。ISBN:9787111555391
+2.  <https://blog.csdn.net/dm_vincent/article/details/7714519> 
+3. Topological sorting, <https://en.wikipedia.org/w/index.php?title=Topological_sorting&oldid=854351542> 

@@ -1,4 +1,4 @@
-author: Ir1d, ouuan, qinggniq, i-Yirannn
+author: Ir1d, ouuan, qinggniq, i-Yirannn, minghu6
 
 ## 定义
 
@@ -22,9 +22,19 @@ author: Ir1d, ouuan, qinggniq, i-Yirannn
 
 ### 后缀
 
- **后缀** 是指从某个位置 $i$ 开始到整个串末尾结束的一个特殊子串。字符串 $S$ 的从 $i$ 开头的后缀表示为 $Suffix(S,i)$ ，也就是 $Suffix(S,i)=S[i..|S|]$ 。
+ **后缀** 是指从某个位置 $i$ 开始到整个串末尾结束的一个特殊子串。字符串 $S$ 的从 $i$ 开头的后缀表示为 $\textit{Suffix(S,i)}$ ，也就是 $\textit{Suffix(S,i)}=S[i..|S|-1]$ 。
 
  **真后缀** 指除了 $S$ 本身的 $S$ 的后缀。
+
+举例来说，字符串 `abcabcd` 的所有后缀为 `{d, cd, bcd, abcd, cabcd, bcabcd, abcabcd}` ，而它的真后缀为 `{d, cd, bcd, abcd, cabcd, bcabcd}` 。
+
+### 前缀
+
+ **前缀** 是指从串首开始到某个位置 $i$ 结束的一个特殊子串。字符串 $S$ 的以 $i$ 结尾的后缀表示为 $\textit{Preffix(S,i)}$ ，也就是 $\textit{Preffix(S,i)}=S[0..i]$ 。
+
+ **真前缀** 指除了 $S$ 本身的 $S$ 的前缀。
+
+举例来说，字符串 `abcabcd` 的所有前缀为 `{a, ab, abc, abca, abcab, abcabc, abcabcd}` , 而它的真前缀为 `{a, ab, abc, abca, abcab, abcabc}` 。
 
 ### 字典序
 
@@ -36,9 +46,9 @@ author: Ir1d, ouuan, qinggniq, i-Yirannn
 
 ## 字符串的存储
 
-1.  使用 `char` 数组存储，用空字符 `\0` 表示字符串的结尾。（C 风格字符串）
-2.  使用 C++ 标准库提供的 [ `string` 类](../lang/csl/string.md) 。
-3.  字符串常量可以用字符串字面值（用双引号括起来的字符串）表示。
+1. 使用 `char` 数组存储，用空字符 `\0` 表示字符串的结尾。（C 风格字符串）
+2. 使用 C++ 标准库提供的 [ `string` 类](../lang/csl/string.md) 。
+3. 字符串常量可以用字符串字面值（用双引号括起来的字符串）表示。
 
 ## 参考资料
 

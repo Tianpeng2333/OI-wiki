@@ -35,7 +35,7 @@ $$
 n = n_t2^t + n_{t-1}2^{t-1} + n_{t-2}2^{t-2} + \cdots + n_12^1 + n_02^0
 $$
 
-其中 $n_i\in{0,1}$ 。那么就有
+其中 $n_i\in\{0,1\}$ 。那么就有
 
 $$
 \begin{aligned}
@@ -77,7 +77,7 @@ long long binpow(long long a, long long b) {
 }
 ```
 
-模板： [Luogu P1226](https://www.luogu.org/problemnew/show/P1226) 
+模板： [Luogu P1226](https://www.luogu.com.cn/problem/P1226) 
 
 ## 应用
 
@@ -125,17 +125,17 @@ long long binpow(long long a, long long b, long long m) {
 
 > 三维空间中， $n$ 个点 $p_i$ ，要求将 $m$ 个操作都应用于这些点。包含 3 种操作：
 >
-> 1.  沿某个向量移动点的位置（Shift）。
-> 2.  按比例缩放这个点的坐标（Scale）。
-> 3.  绕某个坐标轴旋转（Rotate）。
+> 1. 沿某个向量移动点的位置（Shift）。
+> 2. 按比例缩放这个点的坐标（Scale）。
+> 3. 绕某个坐标轴旋转（Rotate）。
 >
 > 还有一个特殊的操作，就是将一个操作序列重复 $k$ 次（Loop），这个序列中也可能有 Loop 操作（Loop 操作可以嵌套）。现在要求你在低于 $O(n \cdot length)$ 的时间内将这些变换应用到这个 $n$ 个点，其中 $length$ 表示把所有的 Loop 操作展开后的操作序列的长度。
 
 让我们来观察一下这三种操作对坐标的影响：
 
-1.  Shift 操作：将每一维的坐标分别加上一个常量；
-2.  Scale 操作：把每一维坐标分别乘上一个常量；
-3.  Rotate 操作：这个有点复杂，我们不打算深入探究，不过我们仍然可以使用一个线性组合来表示新的坐标。
+1. Shift 操作：将每一维的坐标分别加上一个常量；
+2. Scale 操作：把每一维坐标分别乘上一个常量；
+3. Rotate 操作：这个有点复杂，我们不打算深入探究，不过我们仍然可以使用一个线性组合来表示新的坐标。
 
 可以看到，每一个变换可以被表示为对坐标的线性运算，因此，一个变换可以用一个 $4\times 4$ 的矩阵来表示：
 
@@ -228,7 +228,7 @@ $$
 ??? note "前置技能"
     请先学习 [高精度](./bignum.md) 
 
-???+note " 例题【NOIP2003 普及组改编·麦森数】（[原题在此](https://www.luogu.org/problemnew/show/P1045)）"
+???+note " 例题【NOIP2003 普及组改编·麦森数】（[原题在此](https://www.luogu.com.cn/problem/P1045)）"
     题目大意：从文件中输入 P（1000&lt;P&lt;3100000），计算 $2^P−1$ 的最后 100 位数字（用十进制高精度数表示），不足 100 位时高位补 0。
 
 代码实现如下：
@@ -280,13 +280,13 @@ int main() {
 
 ## 习题
 
--    [UVa 1230 - MODEX](http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=3671) 
--    [UVa 374 - Big Mod](http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=310) 
--    [UVa 11029 - Leading and Trailing](https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=1970) 
--    [Codeforces - Parking Lot](http://codeforces.com/problemset/problem/630/I) 
--    [SPOJ - The last digit](http://www.spoj.com/problems/LASTDIG/) 
--    [SPOJ - Locker](http://www.spoj.com/problems/LOCKER/) 
--    [LA - 3722 Jewel-eating Monsters](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=1723) 
+-  [UVa 1230 - MODEX](http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=3671) 
+-  [UVa 374 - Big Mod](http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=310) 
+-  [UVa 11029 - Leading and Trailing](https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=1970) 
+-  [Codeforces - Parking Lot](http://codeforces.com/problemset/problem/630/I) 
+-  [SPOJ - The last digit](http://www.spoj.com/problems/LASTDIG/) 
+-  [SPOJ - Locker](http://www.spoj.com/problems/LOCKER/) 
+-  [LA - 3722 Jewel-eating Monsters](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=1723) 
 -    [SPOJ - Just add it](http://www.spoj.com/problems/ZSUM/) 
 
      **本页面部分内容译自博文 [Бинарное возведение в степень](http://e-maxx.ru/algo/binary_pow) 与其英文翻译版 [Binary Exponentiation](https://cp-algorithms.com/algebra/binary-exp.html) 。其中俄文版版权协议为 Public Domain + Leave a Link；英文版版权协议为 CC-BY-SA 4.0。** 
